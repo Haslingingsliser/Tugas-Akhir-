@@ -18,7 +18,6 @@ Hasil perhitungan audiens (Kendaraan Roda 2, Kendaraan Roda 4, Kendaraan Besar, 
 ## 🗂️ Struktur Repositori
 
 - `Code.py`: Skrip utama (Main script) untuk menjalankan deteksi, pelacakan (tracking), dan rekapitulasi data.
-- `dataset/`: Direktori untuk menyimpan dataset gambar/video Anda. *(Catatan: Isi direktori ini dikosongkan pada repositori publik. Silakan letakkan file dataset Anda sendiri di sini).*
 
 ## ✨ Fitur Utama
 
