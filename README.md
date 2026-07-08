@@ -1,4 +1,4 @@
-Analisis Eksposur Papan Iklan (Billboard Exposure Analysis)
+Analisis Eksposur Papan Iklan (Billboard Exposure Analysis) 
 Repositori ini berisi kode sumber dan struktur direktori dataset untuk penelitian Tugas Akhir yang berfokus pada analisis eksposur papan iklan menggunakan visi komputer (Computer Vision). Sistem ini mendeteksi dan melacak objek (kendaraan dan pejalan kaki) yang melewati area paparan iklan, lalu menghitung total audiens secara otomatis.
 
 🎓 Identitas Penulis
@@ -81,4 +81,4 @@ Setelah semua nilai konfigurasi disesuaikan, jalankan skrip melalui terminal ata
 
 Bash
 python Code.py
-Ikuti instruksi menu di layar untuk memilih Mode Deteksi dan memasukkan nama lokasi papan iklan yang sedang dianalisis
+Ikuti instruksi menu di layar untuk memilih Mode Deteksi dan memasukkan nama lokasi papan iklan yang sedang dianalisis.
