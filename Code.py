@@ -11,14 +11,23 @@ import cv2
 from ultralytics import YOLO
 
 # ===================== CONFIG =====================
-MODEL_PATH = r"D:\Fix_TA\runs\detect\train4\weights\best.pt"
-OUT_DIR = r"D:\Fix_TA\HasilDeteksi_TRACK_MIN"
+# [Wajib Diisi] MASUKKAN PATH KE FILE MODEL DAN OUTPUT ANDA
+MODEL_PATH = r"[ISI_DENGAN_PATH_MODEL_BEST.PT_ANDA]"
+OUT_DIR = r"[ISI_DENGAN_PATH_DIREKTORI_OUTPUT_ANDA]"
 
-# Disesuaikan dengan hasil training dan inferensi CCTV
-CONF_THRES = 0.15
-IOU_THRES = 0.45
-IMG_SIZE = 512
+# [Silakan Sesuaikan] PENGATURAN THRESHOLD & MODEL (Kasih nilai default / tentukan sendiri)
+CONF_THRES = 0.15  # Rentang Rekomendasi: 0.10 s/d 0.50 (Semakin kecil, semakin sensitif mendeteksi objek)
+IOU_THRES = 0.45   # Rentang Rekomendasi: 0.30 s/d 0.70 (Mengatur toleransi overlap box deteksi)
+IMG_SIZE = 512     # Resolusi input model (Umumnya: 320, 512, atau 640 tergantung hasil training)
 
+# [Wajib Diisi] PENGATURAN PELACAKAN (TRACKING) & DEVICE RUNNING
+TRACKER_CONFIG = "[ISI_DENGAN_NAMA_FILE_TRACKER_ANDA]"  # Contoh: "bytetrack.yaml" atau "botsort.yaml"
+DEVICE_RUN = "[ISI_DENGAN_DEVICE_ANDA]"                 # Contoh: 0 atau "cuda" jika pakai GPU, "cpu" jika pakai CPU
+
+# [Silakan Sesuaikan] PENGATURAN SELEKSI INPUT REAL-TIME (OBS/KAMEERA)
+OBS_CAM_INDEX = [ISI_DENGAN_INDEX_KAMERA_ANDA]          # Masukkan angka indeks kamera (Contoh: 0, 1, 2)
+
+# PENGATURAN PROSES FRAME & PREVIEW WINDOW
 FRAME_STRIDE = 1
 PRINT_PROGRESS_EVERY_N_FRAMES = 500
 
@@ -27,7 +36,6 @@ PREVIEW_WINDOW_NAME = "Tugas Akhir Analisis Eksposur Papan Iklan"
 PREVIEW_WAIT_MS = 1
 
 WRITE_OUTPUT_VIDEO = False
-OBS_CAM_INDEX = 2
 
 VIDEO_EXTS = {
     ".mp4", ".mkv", ".avi", ".mov", ".wmv", ".flv", ".m4v", ".webm", ".mpeg", ".mpg", ".3gp"
@@ -57,9 +65,10 @@ MAX_MISSED_SEC = 3.0
 # ========== GOOGLE SHEETS (SUMMARY ONLY) ==========
 ENABLE_GOOGLE_SHEETS = True
 
-SERVICE_ACCOUNT_JSON = r"D:\Fix_TA\tugas-akhir-484802-f094056b0f19.json"
-SPREADSHEET_ID = "1Qe7RfVu3k-vb0HVIb1BXMUcilZJx-T0rR21yhHmn1Iw"
-SHEET_NAME = "LOG_DETEKSI"
+# [Wajib Diisi] MASUKKAN KREDENSIAL DAN ID SPREADSHEET GOOGLE ANDA
+SERVICE_ACCOUNT_JSON = r"[ISI_DENGAN_PATH_FILE_JSON_ANDA]"
+SPREADSHEET_ID = "[ISI_DENGAN_ID_SPREADSHEET_ANDA]"
+SHEET_NAME = "[ISI_DENGAN_NAMA_SHEET_ANDA]"
 # ================================================
 
 
@@ -269,15 +278,16 @@ def process_capture(
         processed_idx += 1
         t_s = time.time() - start_time
 
+        # Menggunakan konfigurasi dinamis yang diambil dari section CONFIG di atas
         results = model.track(
             source=frame,
             conf=CONF_THRES,
             iou=IOU_THRES,
             imgsz=IMG_SIZE,
             persist=True,
-            tracker="bytetrack_TA.yaml",
+            tracker=TRACKER_CONFIG,
             verbose=False,
-            device=0
+            device=DEVICE_RUN
         )
 
         r = results[0]
@@ -403,8 +413,9 @@ def main():
     mode = choose_mode()
 
     if mode == "1":
+        # Menggunakan nilai default lokal atau input kustom nama lokasi
         lokasi = ask_lokasi(default_value="OBS_Lokasi_1")
-        cap = cv2.VideoCapture(OBS_CAM_INDEX, cv2.CAP_DSHOW)
+        cap = cv2.VideoCapture(OBS_CAM_INDEX)
         out_video_path = os.path.join(OUT_DIR, "OBS_bytetrack_min.mp4")
 
         counts = process_capture(
