@@ -1,6 +1,6 @@
 # Analisis Eksposur Papan Iklan (Billboard Exposure Analysis) // Automatic Vehicle Counting and Recognition
 
-Repositori ini berisi kode untuk penelitian **Tugas Akhir** yang berfokus pada analisis eksposur papan iklan menggunakan visi komputer (Computer Vision). Sistem ini mendeteksi dan melacak objek (kendaraan dan pejalan kaki) yang melewati area paparan iklan, lalu menghitung total audiens secara otomatis.
+Repositori ini berisi kode untuk penelitian **Tugas Akhir** yang berfokus pada analisis eksposur papan iklan menggunakan visi komputer (Computer Vision). Sistem ini mendeteksi dan melacak objek (kendaraan dan pejalan kaki) yang melewati area paparan iklan, lalu menghitung total audiens secara otomatis. Untuk _dataset_ yang digunakan dapat diakses pada https://universe.roboflow.com/sistem-deteksi-kendaraan-indonesia/fixta2/dataset/1.
 
 ## Identitas Penulis
 
